@@ -5,6 +5,7 @@ import BreadcrumbLink from '@/components/ui/breadcrumb/BreadcrumbLink.vue';
 import BreadcrumbList from '@/components/ui/breadcrumb/BreadcrumbList.vue';
 import BreadcrumbPage from '@/components/ui/breadcrumb/BreadcrumbPage.vue';
 import BreadcrumbSeparator from '@/components/ui/breadcrumb/BreadcrumbSeparator.vue';
+import { Separator } from '@/components/ui/separator';
 import SidebarInset from '@/components/ui/sidebar/SidebarInset.vue';
 import SidebarProvider from '@/components/ui/sidebar/SidebarProvider.vue';
 import SidebarTrigger from '@/components/ui/sidebar/SidebarTrigger.vue';
@@ -39,7 +40,7 @@ import SidebarComponent from '@/features/admin/components/SidebarComponent.vue';
         </div>
       </header>
       <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
+        <div class="min-h-[100vh] flex-1 rounded-xl md:min-h-min">
           <RouterView />
         </div>
       </div>

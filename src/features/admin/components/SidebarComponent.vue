@@ -5,7 +5,8 @@ import SidebarContent from '@/components/ui/sidebar/SidebarContent.vue';
 import SidebarFooter from '@/components/ui/sidebar/SidebarFooter.vue';
 import SidebarHeader from '@/components/ui/sidebar/SidebarHeader.vue';
 
-import { AudioWaveform, Command, GalleryVerticalEnd, UserIcon } from 'lucide-vue-next';
+import SidebarRail from '@/components/ui/sidebar/SidebarRail.vue';
+import { AudioWaveform, Command, GalleryVerticalEnd, HomeIcon, UserIcon } from 'lucide-vue-next';
 import NavMain from './NavMain.vue';
 import NavUser from './NavUser.vue';
 import TeamSwitcher from './TeamSwitcher.vue';
@@ -38,7 +39,13 @@ const data = {
       plan: 'Free',
     },
   ],
+
   navMain: [
+    {
+      title: 'Dashboard',
+      url: '/',
+      icon: HomeIcon,
+    },
     {
       title: 'Usuarios',
       url: '#',
@@ -58,11 +65,6 @@ const data = {
           url: '#',
         },
       ],
-    },
-
-    {
-      title: 'Dashboard',
-      url: '/',
     },
   ],
 };
