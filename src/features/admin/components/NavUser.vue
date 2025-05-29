@@ -22,7 +22,7 @@ const props = defineProps<{
     avatar: string;
   };
 }>();
-
+const user = props.user;
 const { isMobile } = useSidebar();
 </script>
 
