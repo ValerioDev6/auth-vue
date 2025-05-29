@@ -25,6 +25,8 @@ export default defineConfigWithVueTs(
       'vue/multi-word-component-names': 0,
       'vue/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
+      'unicorn/no-empty-file': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
     },
   },
 );

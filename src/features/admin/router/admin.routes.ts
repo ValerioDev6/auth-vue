@@ -1,24 +1,25 @@
-import { getAdminModuleRoutes } from '@/features/admin/router/admin-features.routes';
+import { USER_ROUTES } from '@/features/users/routes/user.routes';
 import type { RouteRecordRaw } from 'vue-router';
 
-export const LAYOUT_ROUTES: RouteRecordRaw = {
-  path: '/admin',
-  name: 'admin',
-  component: () => import('@/features/admin/layouts/AdminLayout.vue'),
-  children: [
-    {
-      path: '',
-      redirect: { name: 'admin-dashboard' },
-    },
-    {
-      path: 'dashboard',
-      name: 'admin-dashboard',
-      component: () => import('@/features/home/views/HomeView.vue'),
-    },
-    // Cargar dinámicamente todas las rutas de los módulos
-    ...getAdminModuleRoutes(),
-  ],
-};
+export const ADMIN_ROUTES: RouteRecordRaw[] = [
+  {
+    path: '',
+    redirect: 'dashboard',
+  },
+  {
+    path: 'dashboard',
+    name: 'dashboard',
+    component: () => import('@/features/home/views/HomeView.vue'),
+  },
+  {
+    path: 'usuarios',
+    // meta: {
+    //   requiresAuth: true,
+    //   roles: ['ADMIN', 'USER_MANAGER'],
+    // },
+    children: USER_ROUTES, // ✅ Esto SÍ funciona
+  },
+];
 // {
 //   path: 'usuarios',
 //   // meta: { requiresAuth: true, roles: ['ADMIN'] }, // Para guards después
