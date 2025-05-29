@@ -19,4 +19,16 @@ NEST_API.interceptors.request.use((config) => {
   return config;
 });
 
+// 🔍 Interceptor para mostrar todas las respuestas
+NEST_API.interceptors.response.use(
+  (response) => {
+    console.log(`[✅ RESPONSE] ${response.config.url}`, response.data);
+    return response;
+  },
+  (error) => {
+    console.error(`[❌ ERROR] ${error.config?.url}`, error.response?.data || error.message);
+    return Promise.reject(error);
+  },
+);
+
 export { NEST_API };

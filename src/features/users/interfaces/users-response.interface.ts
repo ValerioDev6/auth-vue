@@ -15,7 +15,7 @@ export interface User {
   id: number;
   email: string;
   password: string;
-  avatar: null;
+  avatar?: string;
   roleId: number;
   created_at: Date;
   updated_at: Date;

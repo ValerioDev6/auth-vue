@@ -7,11 +7,9 @@ import { AuthService } from '../services/auth.service';
 
 export const useAuthStore = defineStore('auth-store', () => {
   const authService = new AuthService();
-
   const authStatus = ref<AuthStatus>(AuthStatus.Checking);
   const user = ref<User | undefined>();
   const token = ref(useLocalStorage('token', ''));
-
   const login = async (email: string, password: string) => {
     try {
       const loginResp = await authService.login(email, password);
@@ -49,8 +47,12 @@ export const useAuthStore = defineStore('auth-store', () => {
   };
 
   const logout = () => {
+    // ✅ LIMPIAR TODO CORRECTAMENTE
+    localStorage.removeItem('token');
+    token.value = ''; // Limpiar el reactive ref también
     authStatus.value = AuthStatus.UnAuthenticated;
-    (user.value = undefined), (token.value = '');
+    user.value = undefined;
+
     return false;
   };
 
@@ -86,5 +88,6 @@ export const useAuthStore = defineStore('auth-store', () => {
     login,
     register,
     checkAuthStatus,
+    logout,
   };
 });

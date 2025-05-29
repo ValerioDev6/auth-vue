@@ -1,51 +1,3 @@
-<script setup lang="ts">
-import Avatar from '@/components/ui/avatar/Avatar.vue';
-import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue';
-import AvatarImage from '@/components/ui/avatar/AvatarImage.vue';
-import Breadcrumb from '@/components/ui/breadcrumb/Breadcrumb.vue';
-import BreadcrumbItem from '@/components/ui/breadcrumb/BreadcrumbItem.vue';
-import BreadcrumbLink from '@/components/ui/breadcrumb/BreadcrumbLink.vue';
-import BreadcrumbList from '@/components/ui/breadcrumb/BreadcrumbList.vue';
-import BreadcrumbPage from '@/components/ui/breadcrumb/BreadcrumbPage.vue';
-import BreadcrumbSeparator from '@/components/ui/breadcrumb/BreadcrumbSeparator.vue';
-import Button from '@/components/ui/button/Button.vue';
-import DropdownMenu from '@/components/ui/dropdown-menu/DropdownMenu.vue';
-import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuContent.vue';
-import DropdownMenuGroup from '@/components/ui/dropdown-menu/DropdownMenuGroup.vue';
-import DropdownMenuItem from '@/components/ui/dropdown-menu/DropdownMenuItem.vue';
-import DropdownMenuLabel from '@/components/ui/dropdown-menu/DropdownMenuLabel.vue';
-import DropdownMenuSeparator from '@/components/ui/dropdown-menu/DropdownMenuSeparator.vue';
-import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
-import { Separator } from '@/components/ui/separator';
-import SidebarInset from '@/components/ui/sidebar/SidebarInset.vue';
-import SidebarProvider from '@/components/ui/sidebar/SidebarProvider.vue';
-import SidebarTrigger from '@/components/ui/sidebar/SidebarTrigger.vue';
-import SidebarComponent from '@/features/admin/components/SidebarComponent.vue';
-import { useColorMode } from '@vueuse/core';
-import { LogOut, Monitor, Moon, Settings, Sun, User } from 'lucide-vue-next';
-
-// const description = 'A sidebar that collapses to icons.';
-// const iframeHeight = '800px';
-// const containerClass = 'w-full h-full';
-
-// Color mode con VueUse
-const colorMode = useColorMode();
-
-const setColorMode = (mode: 'light' | 'dark' | 'auto') => {
-  colorMode.value = mode;
-};
-// const isDark = useDark();
-
-// const setTheme = (theme: 'light' | 'dark' | 'system') => {
-//   if (theme === 'system') {
-//     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-//     isDark.value = mediaQuery.matches;
-//   } else {
-//     isDark.value = theme === 'dark';
-//   }
-// };
-</script>
-
 <template>
   <SidebarProvider>
     <SidebarComponent />
@@ -129,9 +81,11 @@ const setColorMode = (mode: 'light' | 'dark' | 'auto') => {
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-              <DropdownMenuItem class="cursor-pointer text-red-600 focus:text-red-600">
-                <LogOut class="mr-2 h-4 w-4" />
-                Cerrar sesión
+              <DropdownMenuItem
+                v-on:click="authStore.logout"
+                class="cursor-pointer text-red-600 focus:text-red-600"
+              >
+                <LogOut class="mr-2 h-4 w-4" />Cerrar sesión
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -139,10 +93,45 @@ const setColorMode = (mode: 'light' | 'dark' | 'auto') => {
       </header>
 
       <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div class="min-h-[100vh] flex-1 rounded-xl md:min-h-min">
+        <div class="min-h-[100vh] flex-1 rounded-xl md:min-h-min p-2">
           <RouterView />
         </div>
       </div>
     </SidebarInset>
   </SidebarProvider>
 </template>
+
+<script setup lang="ts">
+import Avatar from '@/components/ui/avatar/Avatar.vue';
+import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue';
+import AvatarImage from '@/components/ui/avatar/AvatarImage.vue';
+import Breadcrumb from '@/components/ui/breadcrumb/Breadcrumb.vue';
+import BreadcrumbItem from '@/components/ui/breadcrumb/BreadcrumbItem.vue';
+import BreadcrumbLink from '@/components/ui/breadcrumb/BreadcrumbLink.vue';
+import BreadcrumbList from '@/components/ui/breadcrumb/BreadcrumbList.vue';
+import BreadcrumbPage from '@/components/ui/breadcrumb/BreadcrumbPage.vue';
+import BreadcrumbSeparator from '@/components/ui/breadcrumb/BreadcrumbSeparator.vue';
+import Button from '@/components/ui/button/Button.vue';
+import DropdownMenu from '@/components/ui/dropdown-menu/DropdownMenu.vue';
+import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuContent.vue';
+import DropdownMenuGroup from '@/components/ui/dropdown-menu/DropdownMenuGroup.vue';
+import DropdownMenuItem from '@/components/ui/dropdown-menu/DropdownMenuItem.vue';
+import DropdownMenuLabel from '@/components/ui/dropdown-menu/DropdownMenuLabel.vue';
+import DropdownMenuSeparator from '@/components/ui/dropdown-menu/DropdownMenuSeparator.vue';
+import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
+import { Separator } from '@/components/ui/separator';
+import SidebarInset from '@/components/ui/sidebar/SidebarInset.vue';
+import SidebarProvider from '@/components/ui/sidebar/SidebarProvider.vue';
+import SidebarTrigger from '@/components/ui/sidebar/SidebarTrigger.vue';
+import SidebarComponent from '@/features/admin/components/SidebarComponent.vue';
+import { useAuthStore } from '@/features/auth/stores/auth.store';
+import { useColorMode } from '@vueuse/core';
+import { LogOut, Monitor, Moon, Settings, Sun, User } from 'lucide-vue-next';
+
+const authStore = useAuthStore();
+const colorMode = useColorMode();
+
+const setColorMode = (mode: 'light' | 'dark' | 'auto') => {
+  colorMode.value = mode;
+};
+</script>

@@ -19,9 +19,16 @@ authStore.$subscribe((_, state) => {
     return;
   }
 
+  // ✅ Si está en /auth y se autentica -> ir al dashboard
   // if (route.path.includes('/auth') && state.authStatus === AuthStatus.Authenticated) {
   //   router.replace('/admin/dashboard');
   //   return;
   // }
+
+  // ✅ Si hace logout -> ir al login
+  if (state.authStatus === AuthStatus.UnAuthenticated && !route.path.includes('/auth')) {
+    router.replace('/auth/login');
+    return;
+  }
 });
 </script>

@@ -13,9 +13,19 @@ interface GetUserSucces {
 }
 
 export class UsersService {
-  async getAllUsers(page: number, limit: number): Promise<GetUserError | GetUserSucces> {
+  async getAllUsers(
+    page: number,
+    limit: number,
+    search: string = '',
+  ): Promise<GetUserError | GetUserSucces> {
     try {
-      const { data } = await NEST_API.get<IUsersResponse>(`/user?page=${page}&limit=${limit}`);
+      const { data } = await NEST_API.get<IUsersResponse>('/user', {
+        params: {
+          page,
+          limit,
+          search,
+        },
+      });
       return {
         ok: true,
         data,
@@ -31,6 +41,17 @@ export class UsersService {
         ok: false,
         message: 'Error inesperado',
       };
+    }
+  }
+  async createUser(data: any) {
+    try {
+      const resp = await NEST_API.post('/user', data);
+
+      return {
+        data: resp.data,
+      };
+    } catch (error) {
+      console.log(error);
     }
   }
 }
